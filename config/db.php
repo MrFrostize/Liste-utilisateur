@@ -1,11 +1,12 @@
 <?php
-$host = 'localhost:8889';
-$db   = 'test';
-$user = 'diginamic';
-$pass = 'diginamic';
-$charset = 'utf8mb4';
+define('DB_HOST', 'localhost:8889');
+define('DB_NAME', 'test');
+define('DB_USER', 'diginamic');
+define('DB_PASS', 'diginamic');
+define('DB_CHARSET', 'utf8mb4');
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+define('DB_DSN', "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET);
+
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -13,8 +14,9 @@ $options = [
 ];
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
+    $pdo = new PDO(DB_DSN, DB_USER, DB_PASS, $options);
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
+
 ?>

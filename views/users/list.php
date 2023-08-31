@@ -15,6 +15,7 @@
         <input type="text" name="emailSearch" placeholder="Rechercher par email" value="<?php echo htmlspecialchars($emailSearch); ?>">
         <input type="submit" value="Rechercher">
     </form>
+    <a href="index.php?action=create" class="create-user-btn">Créer un nouvel utilisateur</a>
     <table border="1">
         <thead>
             <tr>
@@ -26,17 +27,19 @@
             </tr>
         </thead>
         <tbody>
-        <?php
-        foreach ($users as $user) {
-            echo "<tr>";
-            foreach ($user as $key => $value) {
-                echo "<td>" . htmlspecialchars($value) . "</td>";
-            }
-            echo "<td><a href='index.php?action=detail&id=" . $user['id'] . "'>Voir détails</a></td>"; 
-            echo "</tr>";
-        }
-        ?>
-        </tbody>
+    <?php
+    foreach ($users as $user) {
+        echo "<tr>";
+        echo "<td>" . htmlspecialchars($user['id']) . "</td>";
+        echo "<td>" . htmlspecialchars($user['email']) . "</td>";
+        echo "<td>" . htmlspecialchars($user['firstname']) . "</td>";
+        echo "<td>" . htmlspecialchars($user['lastname']) . "</td>";
+        echo "<td><a href='index.php?action=detail&id=" . $user['id'] . "'>Voir détails</a></td>"; 
+        echo "</tr>";
+    }
+    ?>
+</tbody>
+
     </table>
     <script src="/assets/js/particles-config.js"></script>
 </body>

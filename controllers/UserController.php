@@ -12,16 +12,24 @@ class UserController {
         include 'views/users/list.php';
     }
 
-    public function detail($id) {
-        $user = User::getById($id);
-
-        if (!$user) {
-            echo "Utilisateur non trouvé.";
-            exit;
+    public function detail($id = null) {
+        if ($id) {
+            $user = User::getById($id);
+    
+            if (!$user) {
+                echo "Utilisateur non trouvé.";
+                exit;
+            }
+    
+            include 'views/users/detail.php';
+        } else {
+            $user = [];
+            include 'views/users/detail.php'; 
         }
-
-        include 'views/users/detail.php';
     }
+    
+    
+
     public function update($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstname = $_POST['firstname'];
@@ -35,6 +43,23 @@ class UserController {
         }
     
         $this->detail($id);
+    }
+
+    public function create() {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $email = $_POST['email'];
+    
+            $id = User::create($firstname, $lastname, $email);
+    
+            header('Location: index.php?action=detail&id=' . $id);
+            exit;
+        }
+    
+        $this->detail();
     }    
+    
 }
 ?>
