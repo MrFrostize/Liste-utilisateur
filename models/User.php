@@ -1,5 +1,5 @@
 <?php
-include_once 'config/Database.php';  // Assurez-vous que ce chemin est correct.
+include_once 'config/Database.php';
 
 class User {
     public static function getAll($firstnameSearch, $lastnameSearch, $emailSearch) {
